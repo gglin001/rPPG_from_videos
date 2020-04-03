@@ -62,12 +62,29 @@ def process_data(x, fps=30):
     plt.show()
 
 
+def show_frame(vid):
+    for idx, frame in enumerate(vid.iter_data()):
+        idxx = idx % 30
+        if idxx == 0:
+            fig, axs = plt.subplots(5, 6, figsize=(17, 9))
+            axs = axs.ravel()
+
+        axs[idxx].imshow(frame)
+        axs[idxx].set_title(f"frame id: {idx}")
+        axs[idxx].axis('off')
+        if idxx % 29 == 0 and idxx != 0:
+            plt.tight_layout()
+            plt.show()
+
+
 def main():
     fp = 'data/MOV_0079.mp4'
     vid = imageio.get_reader(fp, 'ffmpeg')
     metadata = vid.get_meta_data()
     print(f'metadata: {metadata}')
     fps = metadata['fps']
+    # show_frame(vid)
+
     rgb = [img_to_signal(img) for img in vid.iter_data()]
     rgb = np.vstack(rgb)
     r, g, b = rgb[:, 0], rgb[:, 1], rgb[:, 2]

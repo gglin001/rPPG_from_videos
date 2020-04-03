@@ -8,6 +8,14 @@ video based heartrate extract algorithm.
 
 google keywords: "rppg"
 
+video frame sample:
+
+![frame sample](img/video_frame.png)
+
+RRI and HR generated from these frames (without denoising):
+
+![rri](img/rri.png)
+
 ## TODO
 
 - [x] video -> rri/hr
